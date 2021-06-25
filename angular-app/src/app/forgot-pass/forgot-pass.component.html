@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <div *ngIf="err"  class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+      <strong >{{err}}</strong> 
+      <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> 
+    <div *ngIf="message"  class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+      <strong >{{message}}</strong> 
+      <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> 
+    <h1 style="text-align: center; margin-bottom: 2rem;">Write Your Valid Email</h1>
+      <form [formGroup] ="form" (ngSubmit)="onSubmit()" >
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+           <input formControlName="email" type="text" class="form-control"   placeholder="email"
+           [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <small *ngIf="f.email.errors.required">this field required</small>
+          </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Submit</button>
+       
+        </form>
+      
+  </div>
+  

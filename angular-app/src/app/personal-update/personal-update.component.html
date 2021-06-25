@@ -1,0 +1,151 @@
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+    
+        <div class="card card-5">
+            <div class="card-heading">
+                <h2 class="title">Update Your Profile</h2>
+            </div>
+            <div class="card-body">
+             
+                <form [formGroup]="personalForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row m-b-55">
+                        <div class="name">Social Media</div>
+                        <div class="value">
+                            <div class="row row-space">
+                                <div class="col-2">
+                                  <div *ngIf="f.github.invalid" class="text text-danger">
+                                    <small *ngIf="f.github.errors.required">this field required</small>
+                                    <small *ngIf="f.github.errors.pattern">in-valid url</small>
+                                </div>
+                                    <div class="input-group-desc">
+                                        <input formControlName="github" class="input--style-5" type="text" name="github">
+                                        <label class="label--desc">Github</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                  <div *ngIf="f.linkdin.invalid" class="text text-danger">
+                                    <small *ngIf="f.linkdin.errors.required">this field required</small>
+                                    <small *ngIf="f.linkdin.errors.pattern">in-valid url</small>
+                                </div>
+                                    <div class="input-group-desc">
+                                        <input formControlName="linkdin" class="input--style-5" type="text" name="linkdin">
+                                        <label class="label--desc">Linkdin</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Occupation</div>
+                        <div class="value">
+                          <div *ngIf="f.work.invalid" class="text text-danger">
+                            <small *ngIf="f.work.errors.required">this field required</small>
+                            <!-- <small *ngIf="f.work.errors.pattern">Only char required</small> -->
+                            <small *ngIf="f.work.errors.minlength">minimum length 4 char</small>
+                        </div>
+                            <div class="input-group">
+                                <input formControlName="work" class="input--style-5" type="text" name="work">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row m-b-55">
+                      <div class="name">Address</div>
+                      <div class="value">
+                          <div class="row row-space">
+                              <div class="col-2">
+                                <div *ngIf="f.country.invalid" class="text text-danger">
+                                  <small *ngIf="f.country.errors.required">this field required</small>
+                                  <!-- <small *ngIf="f.country.errors.pattern">Only char required</small> -->
+                                  <small *ngIf="f.country.errors.minlength">minimum length 4 char</small>
+                              </div>
+                                  <div class="input-group-desc">
+                                      <input formControlName="country" class="input--style-5" type="text" name="country">
+                                      <label class="label--desc">Country</label>
+                                  </div>
+                              </div>
+                              <div class="col-2">
+                                <div *ngIf="f.address.invalid" class="text text-danger">
+                                  <small *ngIf="f.address.errors.required">this field required</small>
+                                  <small *ngIf="f.address.errors.minlength">minimum length 4 char</small>
+                                  <small *ngIf="f.address.errors.maxlength">maximum length 40 char</small>
+                              </div>
+                                  <div class="input-group-desc">
+                                      <input formControlName="address" class="input--style-5" type="text" name="address">
+                                      <label class="label--desc">Location</label>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-row m-b-55">
+                    <div class="name">Personal</div>
+                    <div class="value">
+                        <div class="row row-space">
+                            <div class="col-2">
+                              <div *ngIf=" f.birthDate.invalid" class="text text-danger">
+                                <small *ngIf="f.birthDate.errors.required">this field required</small>
+                                </div>
+                                <div class="input-group-desc">
+                                    <!-- <input class="input--style-5" type="text" name="birthDate"> -->
+                                   
+                                    <mat-form-field>
+                                      <input formControlName="birthDate" matInput [matDatepicker]="picker" >
+                                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker startView="year"></mat-datepicker>
+                                    </mat-form-field>
+                                    <label class="label--desc">Birthday</label>
+                            
+                                </div>
+                            </div>
+                            <div class="col-2">
+                              <div *ngIf="f.postCode.invalid" class="text text-danger">
+                                <small *ngIf="f.postCode.errors.required">this field required</small>
+                                <!-- <small *ngIf="f.postCode.errors.pattern">Only number required</small> -->
+                            </div>
+                                <div class="input-group-desc">
+                                    <input formControlName="postCode" class="input--style-5" type="text" name="postCode">
+                                    <label class="label--desc">Postal Code</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="form-row m-b-55">
+                  <div class="name">Profile</div>
+                  <div class="value">
+                    <div *ngIf="f.profile.invalid" class="text text-danger">
+                      <small *ngIf="f.profile.errors.required">this field required</small>
+                      <small *ngIf="f.profile.errors.minlength">minimum length 10 char</small>
+                  </div>
+                      <div class="input-group">
+                          <textarea formControlName="profile" class="input--style-5" type="text" name="profile" ></textarea>
+                      </div>
+                  </div>
+              </div>
+                 
+                
+                    <div class="form-row">
+                        <div class="name">Image</div>
+                        <div class="value">
+                          <div *ngIf="f.image.invalid" class="text text-danger">
+                            <small *ngIf="f.image.errors.required">this field required</small>
+                            </div>
+                            <div class="input-group">
+                               <input  type="file" name="image" (change)="selectImage($event)">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn--radius-2 btn--red" type="submit"  >Profile Update</button>
+                    </div>
+                </form>
+                <div *ngIf="alert" class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                  <strong>Profile Updated !</strong>  check your profile
+                  <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

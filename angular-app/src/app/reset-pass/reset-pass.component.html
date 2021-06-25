@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <div *ngIf="err"  class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+    <strong >{{err}}</strong> 
+    <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input formControlName="password" type="password" class="form-control" placeholder="password"
+        [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <small *ngIf="f.password.errors.required">this field required</small>
+        </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input formControlName="confirmPassword" type="password" class="form-control" placeholder="password"
+          [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+              <small *ngIf="f.confirmPassword.errors.required">this field required</small>
+              <small *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</small>
+          </div>
+          </div>
+        <button type="submit"  class="btn btn-primary">Submit</button>
+     
+      </form>
+    
+</div>
