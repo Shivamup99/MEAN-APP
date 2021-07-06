@@ -15,5 +15,5 @@ router.put("/api/data/user/:_id",auth,  userControl.putUser);
 
 router.delete("/api/data/user/:_id",auth,userControl.deleteUser)
 router.put("/api/data/forgetPass",userControl.forgotPassword)
-router.put("/api/data/resetPassword/:token",userControl.resetPasswordLink)
+router.put("/api/data/resetPassword/:_id/:token",userControl.resetPasswordLink)
 module.exports = router

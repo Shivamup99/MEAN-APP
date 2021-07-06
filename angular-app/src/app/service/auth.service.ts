@@ -84,8 +84,8 @@ export class AuthService {
     return this.http.put('http://localhost:4000/api/data/forgetPass',data)
   }
   
-  resetPassword(token:string,data): Observable<any>{
-    return this.http.put('http://localhost:4000/api/data/resetPassword/'+token,data)
+  resetPassword(_id:string,token:string,data): Observable<any>{
+    return this.http.put('http://localhost:4000/api/data/resetPassword/'+_id+'/'+token,data)
 
 }
 }

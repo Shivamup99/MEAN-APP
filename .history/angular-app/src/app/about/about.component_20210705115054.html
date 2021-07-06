@@ -1,0 +1,35 @@
+<div class="container mt-4">
+
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <small>11 mins ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>UserId</th>
+      <th>Title</th>
+      <th>Completed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of user"  id="liveToastBtn">
+      <td>{{ person.id }}</td>
+      <td>{{ person.userId }}</td>
+      <td>{{ person.title }}</td>
+      <td>{{ person.completed }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

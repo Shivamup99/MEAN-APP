@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import jwt_decode from 'jwt-decode';
 @Component({
   selector: 'app-reset-pass',
   templateUrl: './reset-pass.component.html',
   styleUrls: ['./reset-pass.component.css']
 })
-export class ResetPassComponent {
+export class ResetPassComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   alert : boolean=false
   err: any
+  message :any
   submitted:boolean=false
   constructor(private auth : AuthService, private router:Router, private route:ActivatedRoute,private fb:FormBuilder) { 
     this.form = this.fb.group ({
@@ -24,18 +26,26 @@ export class ResetPassComponent {
   get f(){
     return this.form.controls
   }
+  id: any
+  token: any
+  ngOnInit():void
+  {
+    this.id=this.route.snapshot.params._id,
+    this.token=this.route.snapshot.params.token
+  }
 
   onSubmit(){
+    console.log(this.id)
     this.submitted =true
     if(this.form.valid){
-     console.log(this.route.snapshot.params.token)
-     this.auth.resetPassword(this.route.snapshot.params.token,this.form.value).subscribe((data)=>{
-       console.log(data)
+     this.auth.resetPassword( this.id,this.token, this.form.value).subscribe((data)=>{
+      console.log(this.route.snapshot.params._id)
      })
-    } else{ return}
    }
+  }
   closeAlert(){
     this.err=false
+    this.message= false
   }
    
   MustMatch(controlName: string, matchingControlName: string) {
@@ -44,11 +54,8 @@ export class ResetPassComponent {
         const matchingControl = formGroup.controls[matchingControlName];
 
         if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-            // return if another validator has already found an error on the matchingControl
             return;
         }
-
-        // set error on matchingControl if validation fails
         if (control.value !== matchingControl.value) {
             matchingControl.setErrors({ mustMatch: true });
         } else {

@@ -1,0 +1,53 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-about',
+  templateUrl: './about.component.html',
+  styleUrls: ['./about.component.css']
+})
+export class AboutComponent implements OnInit {
+  title:'datatables'
+  dtOptions: DataTables.Settings = {};
+  post;
+  constructor(private http :HttpClient) { }
+
+  ngOnInit(): void {
+    this.dtOptions={
+      pagingType:'full_numbers',
+      pageLength:5,
+      processing:true
+    }
+
+    this.http.get('http://jsonplaceholder.typicode.com/todos').subscribe((posts:any)=>{
+      this.post = posts; $(function(){
+        $("#about").DataTable();
+       });
+      console.log(this.post)
+    })
+
+    
+    
+  }
+  
+ 
+  getDataFromSource() {
+    this.http.get('http://jsonplaceholder.typicode.com/todos').subscribe(data => {
+      this.po= data.data;
+      this.dtOptions = {
+        data: this.tableData,
+        columns: [
+          {title: 'ID', data: 'id'},
+          {title: 'Email', data: 'email'},
+          {title: 'First Name', data: 'first_name'},
+          {title: 'Last Name', data: 'last_name'},
+          {title: 'Avatar', data: 'avatar'},
+        ]
+      };
+    }, err => {}, () => {
+      this.dataTable = $(this.table.nativeElement);
+      this.dataTable.DataTable(this.dtOptions);
+    });
+  }
+
+}

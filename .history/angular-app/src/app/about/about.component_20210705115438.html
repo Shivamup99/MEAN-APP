@@ -1,0 +1,30 @@
+<div class="container mt-4">
+
+  <div class="card">
+    <h5 class="card-header">Click row to get data here !</h5>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>UserId</th>
+      <th>Title</th>
+      <th>Completed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of user">
+      <td>{{ person.id }}</td>
+      <td>{{ person.userId }}</td>
+      <td>{{ person.title }}</td>
+      <td>{{ person.completed }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

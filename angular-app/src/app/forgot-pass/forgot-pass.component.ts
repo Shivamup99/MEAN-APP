@@ -31,7 +31,6 @@ export class ForgotPassComponent implements OnInit {
     },error=>( this.err="in - valid email")
     )
   }
-  this.form.reset()
   }
   closeAlert(){
     this.err =false

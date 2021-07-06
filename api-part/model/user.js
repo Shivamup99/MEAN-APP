@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Personal'
     }],
+    book:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Book'
+    }],
     resetPasswordLink:{
         type:String,
         default:""
