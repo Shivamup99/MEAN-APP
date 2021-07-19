@@ -15,6 +15,7 @@ import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { ResetPassComponent } from './reset-pass/reset-pass.component';
 import { MovieComponent } from './movie/movie.component';
 import { ChartComponent } from './chart/chart.component';
+import { CalenderComponent } from './calender/calender.component';
 const routes: Routes = [
   {
     path:'', component: HomeComponent , canActivate: [AuthGuard] 
@@ -54,6 +55,9 @@ const routes: Routes = [
   },
   {
     path:'language-chart', component: ChartComponent , canActivate: [AuthGuard]
+  },
+  {
+    path:'calender', component: CalenderComponent 
   },
   {
     path:'**' , component:NotFoundComponent , canActivate: [AuthGuard]

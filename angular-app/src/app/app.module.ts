@@ -25,14 +25,16 @@ import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { ResetPassComponent } from './reset-pass/reset-pass.component';
 import { MovieComponent } from './movie/movie.component'
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from 'angularx-social-login';
+import { GoogleLoginProvider,FacebookLoginProvider } from 'angularx-social-login';
 import { DataTablesModule } from "angular-datatables";
 import { ChartComponent } from './chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SearchFilterPipe } from './common/search-filter.pipe';
+import { CalenderComponent } from './calender/calender.component';
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
 
 @NgModule({
   declarations: [
@@ -51,10 +53,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ForgotPassComponent,
     ResetPassComponent,
     MovieComponent,
-    ChartComponent
+    ChartComponent,
+    SearchFilterPipe,
+    CalenderComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -68,7 +72,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SocialLoginModule,
     DataTablesModule,
     ChartsModule,
-    NgbModule
+    NgbModule,
+    Ng2SearchPipeModule,
+    Ng2FlatpickrModule,
+    DateValueAccessorModule
   ],
   providers: [
     {

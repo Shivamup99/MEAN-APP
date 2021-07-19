@@ -1,0 +1,7 @@
+<h1>Date Picker</h1>
+
+<div [formGroup]="form" style="margin-left: 30rem;">
+    <ng2-flatpickr #startPicker [config]="startOptions" placeholder="Pickup Date" formControlName="start"></ng2-flatpickr>
+    <br>
+    <ng2-flatpickr #endPicker [config]="endOptions" placeholder="Return Date" formControlName="end"></ng2-flatpickr>
+  </div>
