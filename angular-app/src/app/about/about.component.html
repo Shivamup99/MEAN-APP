@@ -1,28 +1,59 @@
-<div class="container mt-4">
-
-  <div class="card">
-    <h5 class="card-header">Click row to get data here !</h5>
-    <div class="card-body">
-      <h5 class="card-title">{{message}}</h5>
-    </div>
+<h1>NGXDATATABLE</h1>
+<br>
+<div class="container">
+  <div class="select">
+    <ng-select [multiple]="true" [(ngModel)]="selectedROw"  (change)="getValues()" placeholder="Select User ID">
+      <ng-option *ngFor="let item of row" [value]="item.userId">{{item.userId}}</ng-option>
+  </ng-select>
   </div>
- <br>
-<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-success table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>UserId</th>
-      <th>Title</th>
-      <th>Completed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let person of user">
-      <td>{{ person.id }}</td>
-      <td>{{ person.userId }}</td>
-      <td>{{ person.title }}</td>
-      <td>{{ person.completed }}</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+
+  <div class="select">
+    <ng-select [multiple]="true" [(ngModel)]="selectedRow"  (change)="getValuesC()" placeholder="Select User ID">
+      <ng-option *ngFor="let item of com" [value]="item.completed">{{item.completed}}</ng-option>
+  </ng-select>
+  </div>
+  
+  <input type="text" style="margin-left: 50rem; margin-bottom: 1rem; padding: 10px;"  placeholder="Type to filter the name column..." (keyup)="updateFilter($event)" />
+ <button (click)="onRemoveRow()" class="btn btn-danger">Remove</button>
+ 
+  <ngx-datatable #table 
+class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+[rowHeight]="50"  [sorts]="[{prop: 'name', dir: 'desc'}]" [limit]="10"
+          [selected]="selected"                               
+          [selectionType]="SelectionType.checkbox"
+          [selectAllRowsOnPage]="false"
+          (select)='onSelect($event)'
+      >
+      <ngx-datatable-column
+            [width]="30"
+            [sortable]="false"
+            [canAutoResize]="false"
+            [draggable]="false"
+            [resizeable]="false"
+            [headerCheckboxable]="true"
+            [checkboxable]="true"
+          >
+          </ngx-datatable-column>
+
+      <ngx-datatable-column name="ID" prop="id" >
+        <ng-template let-row="row"  ngx-datatable-cell-template>
+          {{ row.id }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="User-ID" prop="userId" >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.userId }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Title" prop="title" >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.title }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Body" prop="completed" >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.completed }}
+        </ng-template>
+      </ngx-datatable-column>
+      </ngx-datatable>
+      </div>

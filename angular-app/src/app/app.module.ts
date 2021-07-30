@@ -26,7 +26,6 @@ import { ResetPassComponent } from './reset-pass/reset-pass.component';
 import { MovieComponent } from './movie/movie.component'
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider,FacebookLoginProvider } from 'angularx-social-login';
-import { DataTablesModule } from "angular-datatables";
 import { ChartComponent } from './chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -35,6 +34,8 @@ import { SearchFilterPipe } from './common/search-filter.pipe';
 import { CalenderComponent } from './calender/calender.component';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { DateValueAccessorModule } from 'angular-date-value-accessor';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -70,12 +71,13 @@ import { DateValueAccessorModule } from 'angular-date-value-accessor';
     NgxPaginationModule,
     Ng2OrderModule,
     SocialLoginModule,
-    DataTablesModule,
     ChartsModule,
     NgbModule,
     Ng2SearchPipeModule,
     Ng2FlatpickrModule,
-    DateValueAccessorModule
+    DateValueAccessorModule,
+    NgxDatatableModule,
+    NgSelectModule
   ],
   providers: [
     {

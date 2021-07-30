@@ -43,4 +43,9 @@ export class HomeService {
       headers:{Authorization:`Bearer ${token}`}
     })
   }
+
+  
+    getTodo(){
+      return this.http.get('https://jsonplaceholder.typicode.com/todos')
+    }
 }

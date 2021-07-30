@@ -1,70 +1,92 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { ColumnMode ,SelectionType} from '@swimlane/ngx-datatable';
+import { HomeService } from '../service/home.service';
+
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent implements OnInit , OnDestroy {
-  dtOptions: any = {};
-  user: any =[]
-  message=''
-  dtTrigger: Subject<any> = new Subject<any>();
+export class AboutComponent implements OnInit {
+  brandName :any;
+  @ViewChild('table') table: any;
+  rows = [];
+  temp=[];
+  selected = [];
+  loadingIndicator = true;
+  reorderable = true;
+  selectedROw=[]
+  selectedRow=[]
+  row =[]
+  com=[]
 
-  someClick(info:any): void{
-    this.message = info.id + '  ,  ' + info.title + '   , ' + info.completed
+  ColumnMode = ColumnMode;
+  SelectionType = SelectionType;
+
+  constructor(private http: HttpClient , private user: HomeService) { 
+   
   }
-  constructor(private http: HttpClient) { }
   
   ngOnInit(): void {
-    this.dtOptions={
-      scrollY:300,
-      columns: [{
-        title: 'ID',
-        data: 'id'
-      }, {
-        title: 'UserID',
-        data: 'userId'
-      }, {
-        title: 'Title',
-        data: 'title'
-      }, {
-        title: 'Completed',
-        data: 'completed'
-      }],
-       
-      dom: 'lBfrtip',
-      buttons: ['colvis'],
-      
-      
-      language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Search Data"
-    },
-      rowCallback: (row: Node, data: any[] | Object, index: number) => {
-        const self = this;
-        $('td', row).off('click');
-        $('td', row).on('click', () => {
-          self.someClick(data);
-          console.log(data)
-        });
-        return row;
-      }
-    }
-
-    this.http.get('https://jsonplaceholder.typicode.com/todos').subscribe((data:any)=>{
-       this.user = data
-       this.dtTrigger.next()
-       console.log(this.user)
+    this.user.getTodo().subscribe((post:any)=>{
+      this.temp = [...post]
+      this.rows = post
+      setTimeout(() => {
+        this.loadingIndicator = false;
+      }, 1500);
+     this.row = this.rows.filter((data, i, arr)=>{
+      return arr.indexOf(arr.find(t => t.userId === data.userId)) === i;
+   })
+   this.com = this.rows.filter((cam,j,array)=>{
+     return array.indexOf(array.find(l=>l.completed===cam.completed))===j;
+   })
     })
-    };
-   
-    ngOnDestroy(){
-      return this.dtTrigger.unsubscribe()
-    }
+  };
 
-  
-  
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    const temp = this.temp.filter((d)=> {
+      return d.title.toLowerCase().indexOf(val) !== -1 || !val
+    });
+    this.rows = temp;
+    this.table.offset = 0;
+  }
+
+  onSelect({ selected }) {
+    //console.log('Select Event', this.selected);
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
+  }
+
+  getValues() { 
+   let fill=[];
+   this.selectedROw.map((u)=>{
+   let filter=this.temp.filter(item=>item.userId==u)
+   filter.map((v)=>
+       fill.push(v)
+      )
+   })
+   this.rows = fill
+  if(this.selectedROw.length==0)
+  {
+    this.rows=this.temp
+  }
+  }
+
+  getValuesC(){
+   let fillter2 = this.temp.filter(item=>item.completed==this.selectedRow)
+   this.rows = fillter2
+   if(this.selectedRow.length==0)
+   {
+     this.rows=this.temp
+   }
+  } 
+  onRemoveRow(){
+    this.selected.map((u,i)=>{
+      this.rows=this.rows.filter(v=>v.id!=u.id)
+    })
+    
+  }
 }
